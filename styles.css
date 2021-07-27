@@ -41,4 +41,21 @@ body {
 .output {
   grid-column: 1/ -1;
   background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 15px;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.output .previous-operand {
+  color: lightslategray;
+  font-size: 26px;
+}
+
+.output .current-operand {
+  color: whitesmoke;
+  font-size: 28px;
 }
