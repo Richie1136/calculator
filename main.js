@@ -42,6 +42,7 @@ class Calculator {
         break
       case '/':
         computation = prev / cur
+        break
       default:
         return
     }
