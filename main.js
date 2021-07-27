@@ -1,7 +1,7 @@
 class Calculator {
-  constructor(previousOperan, currentOperan) {
-    this.previousOperan = previousOperan
-    this.currentOperan = currentOperan
+  constructor(previous, current) {
+    this.previous = previous
+    this.current = current
     this.clear()
   }
   clear() {
@@ -49,9 +49,30 @@ class Calculator {
     this.operation = undefined
     this.previousOperand = ''
   }
+  getDisplayNumber(number) {
+    const stringNumber = number.toString()
+    const inteDigit = parseFloat(stringNumber.split('.')[0])
+    const desdigit = stringNumber.split('.')[1]
+    let inteDisplay
+    if (isNaN(inteDigit)) {
+      inteDisplay = ''
+    } else {
+      inteDisplay = inteDigit.toLocaleString('en', { maximumFractionDigits: 0 })
+    }
+    if (desdigit != null) {
+      return `${inteDisplay}.${desdigit}`
+    } else {
+      return inteDisplay
+    }
+  }
+
   updateDisplay() {
-    this.currentOperand.innerText = this.currentOperand
-    this.previousOperand.innerText = this.previousOperand
+    this.current.innerText = this.getDisplayNumber(this.currentOperand)
+    if (this.operation != null) {
+      this.previous.innerText = `${this.getDisplayNumber(this.previousOperand)}${this.operation}`
+    } else {
+      this.previous.innerText = ''
+    }
   }
 }
 
@@ -61,11 +82,11 @@ const dataButtons = document.querySelectorAll('[data-operation]')
 const equals = document.querySelector('[data-equals]')
 const del = document.querySelector('[data-delete]')
 const clear = document.querySelector('[data-clear]')
-const previousOperan = document.querySelector('[data-previous-operand]')
-const currentOperan = document.querySelector('[data-current-operand]')
+const previous = document.querySelector('[data-previous-operand]')
+const current = document.querySelector('[data-current-operand]')
 
 
-const calculator = new Calculator(previousOperan, currentOperan)
+const calculator = new Calculator(previous, current)
 
 
 numberButtons.forEach(button => {
